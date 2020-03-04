@@ -48,20 +48,20 @@ else ()
   set ( LJVM_MODE elfasm )  
 endif ()
 
-IF(NOT WIN32)
-  FIND_LIBRARY(DL_LIBRARY "dl")
-  IF(DL_LIBRARY)
-    SET(CMAKE_REQUIRED_LIBRARIES ${DL_LIBRARY})
-    LIST(APPEND LIBS ${DL_LIBRARY})
-  ENDIF(DL_LIBRARY)
-  CHECK_FUNCTION_EXISTS(dlopen LUA_USE_DLOPEN)
-  IF(NOT LUA_USE_DLOPEN)
-    MESSAGE(FATAL_ERROR "Cannot compile a useful lua.
-Function dlopen() seems not to be supported on your platform.
-Apparently you are not on a Windows platform as well.
-So lua has no way to deal with shared libraries!")
-  ENDIF(NOT LUA_USE_DLOPEN)
-ENDIF(NOT WIN32)
+#IF(NOT WIN32)
+#  FIND_LIBRARY(DL_LIBRARY "dl")
+#  IF(DL_LIBRARY)
+#    SET(CMAKE_REQUIRED_LIBRARIES ${DL_LIBRARY})
+#    LIST(APPEND LIBS ${DL_LIBRARY})
+#  ENDIF(DL_LIBRARY)
+#  CHECK_FUNCTION_EXISTS(dlopen LUA_USE_DLOPEN)
+#  IF(NOT LUA_USE_DLOPEN)
+#    MESSAGE(FATAL_ERROR "Cannot compile a useful lua.
+#Function dlopen() seems not to be supported on your platform.
+#Apparently you are not on a Windows platform as well.
+#So lua has no way to deal with shared libraries!")
+#  ENDIF(NOT LUA_USE_DLOPEN)
+#ENDIF(NOT WIN32)
 
 CHECK_LIBRARY_EXISTS(m sin "" LUA_USE_LIBM)
 if ( LUA_USE_LIBM )
@@ -119,9 +119,9 @@ FOREACH(arch X64 X86 ARM PPC PPCSPE MIPS)
   ENDIF()
 ENDFOREACH()
 
-IF(NOT TARGET_LJARCH)
-  MESSAGE(FATAL_ERROR "architecture not supported")
-ENDIF()
+#IF(NOT TARGET_LJARCH)
+#  MESSAGE(FATAL_ERROR "architecture not supported")
+#ENDIF()
 
 SET(DASM_ARCH ${TARGET_LJARCH})
 SET(DASM_FLAGS)
